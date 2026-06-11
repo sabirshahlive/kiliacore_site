@@ -4,9 +4,12 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
-DEBUG = os.environ.get('DEBUG', 'False') == 'False'
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = ['www.kiliacore.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = os.environ.get(
+    'ALLOWED_HOSTS',
+    'www.kiliacore.com,localhost,127.0.0.1'
+).split(',')
 
 # Application definition
 INSTALLED_APPS = [
@@ -22,7 +25,10 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'config.urls'
-CSRF_TRUSTED_ORIGINS = ['https://www.kiliacore.com']
+CSRF_TRUSTED_ORIGINS = [
+    'https://www.kiliacore.com',
+    'https://kiliacore.com',
+]
 
 TEMPLATES = [
     {
