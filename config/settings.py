@@ -43,7 +43,8 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # For zero‑DB setup, use the dummy backend:
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.dummy',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': ':memory:',
     }
 }
 
