@@ -64,7 +64,7 @@ Sent from KiliaCore landing page.
             send_email_via_maileroo(
                 subject=subject,
                 message=email_body,
-                to_email='kiliacoresoftware@gmail.com',
+                to_email='shahsabir946@gmail.com',
                 reply_to=email
             )
 
