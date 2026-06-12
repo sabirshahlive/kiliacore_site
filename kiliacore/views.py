@@ -62,7 +62,7 @@ Sent from KiliaCore landing page.
             send_email(
                 subject=subject,
                 message=email_body,
-                to_email='shahsabir946@gmail.com',
+                to_email='kiliacoresoftware@gmail.com',
                 reply_to=email
             )
 

@@ -75,6 +75,6 @@ else:
     EMAIL_HOST_USER = 'resend'
     EMAIL_HOST_PASSWORD = os.environ.get('RESEND_API_KEY')
 
-DEFAULT_FROM_EMAIL = 'support@kiliacore.com'
-SERVER_EMAIL = 'support@kiliacore.com'
-SUPPORT_EMAIL = 'support@kiliacore.com'
+DEFAULT_FROM_EMAIL = 'kiliacoresoftware@gmail.com'
+SERVER_EMAIL = 'kiliacoresoftware@gmail.com'
+SUPPORT_EMAIL = 'kiliacoresoftware@gmail.com'
