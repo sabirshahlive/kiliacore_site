@@ -1,489 +1,424 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>KiliaCore — Custom Software | SaaS | dApps</title>
-  <!-- Tailwind + Font Awesome + Google Fonts -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>KiliaCore — Custom Softwares | Web Apps | dApps | Enterprise SaaS</title>
+  <!-- Font Awesome icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <style>
-    * { transition: all 0.2s ease; }
-    html {
-    scroll-behavior: smooth;
-    }
-    body { font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
-    .gradient-brand {
-      background: linear-gradient(135deg, #0c2e4a 0%, #1b5a7a 100%);
-    }
-    .card-hover:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 20px 25px -12px rgba(0,0,0,0.1);
-    }
-    .testimonial-card {
-      background: #ffffff;
-      border-radius: 1.5rem;
-      transition: all 0.25s;
-    }
-    .testimonial-card:hover {
-      transform: scale(1.02);
-      box-shadow: 0 20px 30px -12px rgba(0,0,0,0.08);
-    }
-    .glow-btn {
-      transition: all 0.2s;
-    }
-    .glow-btn:hover {
-      box-shadow: 0 0 12px rgba(56, 189, 248, 0.5);
-    }
-    .bg-dot-pattern {
-      background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 1px);
-      background-size: 24px 24px;
-    }
-  </style>
+  <!-- Our custom CSS -->
+  <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+  <!-- CSRF token for AJAX calls -->
+  <meta name="csrf-token" content="{% csrf_token %}">
 </head>
-<body class="bg-white text-gray-800">
 
+<body>
   <!-- Navigation -->
-  <nav class="sticky top-0 z-50 bg-black backdrop-blur-sm border-b border-gray-200 shadow-sm">
-    <div class="max-w-7xl mx-auto px-6 sm:px-8 py-4 flex justify-between items-center">
-      <div class="flex items-center gap-2">
-        <img src="static/images/kiliacore logo.png" alt="KiliaCore Logo" class="h-14 w-auto">
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <img src="{% static 'images/kiliacore logo.png' %}" alt="KiliaCore Logo" class="logo-img">
       </div>
-      <div class="hidden md:flex space-x-8 font-medium text-white">
-        <a href="#solutions" class="hover:text-cyan-400">Solutions</a>
-        <a href="#saas" class="hover:text-cyan-400">SaaS</a>
-        <a href="#dapps" class="hover:text-cyan-400">dApps</a>
-        <a href="#testimonials" class="hover:text-cyan-400">Clients</a>
-        <a href="#contact" class="hover:text-cyan-400">Contact</a>
+      <div class="nav-links">
+        <a href="#solutions">Solutions</a>
+        <a href="#saas">SaaS</a>
+        <a href="#dapps">dApps</a>
+        <a href="#testimonials">Clients</a>
+        <a href="#contact">Contact</a>
       </div>
-      <div class="flex items-center gap-3">
-        <a href="#contact" class="hidden md:inline-block bg-cyan-700 text-white px-5 py-2 rounded-full text-sm font-semibold shadow hover:bg-cyan-600 transition glow-btn">Get in touch</a>
-        <button id="mobileMenuBtn" class="md:hidden text-2xl text-gray-600 focus:outline-none"><i class="fas fa-bars"></i></button>
+      <div class="nav-actions">
+        <a href="#contact" class="btn-contact-nav">Get in touch</a>
+        <button id="mobileMenuBtn" class="mobile-toggler"><i class="fas fa-bars"></i></button>
       </div>
     </div>
     <!-- Mobile menu -->
-    <div id="mobileMenu" class="md:hidden hidden bg-white border-t border-gray-100 px-6 py-4 flex flex-col space-y-3 shadow-lg">
-      <a href="#solutions" class="text-gray-700 hover:text-cyan-700 py-1">Solutions</a>
-      <a href="#lims" class="text-gray-700 hover:text-cyan-700 py-1">SaaS</a>
-      <a href="#dapps" class="text-gray-700 hover:text-cyan-700 py-1">dApps</a>
-      <a href="#testimonials" class="text-gray-700 hover:text-cyan-700 py-1">Clients</a>
-      <a href="#contact" class="text-gray-700 hover:text-cyan-700 py-1">Contact</a>
-      <a href="#contact" class="bg-cyan-700 text-white text-center rounded-full py-2 font-semibold mt-2">Contact us</a>
+    <div id="mobileMenu" class="mobile-menu hidden">
+      <a href="#solutions">Solutions</a>
+      <a href="#saas">SaaS</a>
+      <a href="#dapps">dApps</a>
+      <a href="#testimonials">Clients</a>
+      <a href="#contact">Contact</a>
+      <a href="#contact" class="btn-contact-mobile">Contact us</a>
     </div>
   </nav>
 
-  <section class="gradient-brand bg-dot-pattern relative overflow-hidden">
-    <div class="max-w-7xl mx-auto px-6 sm:px-8 pt-8 pb-20 md:pt-12 md:pb-8 relative z-10">
-        <!-- Flex container for text + animation -->
-        <div class="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
-        <!-- Left side: text content -->
-        <div class="flex-1 max-w-2xl">
-            <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-1.5 text-sm mb-6">
-            <i class="fas fa-code"></i> <span>Custom software · dApps · Enterprise SaaS</span>
-            </div>
-            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight leading-tight">
-            Beyond code. <span class="text-cyan-300">Core strength</span> for your digital future.
-            </h1>
-            <p class="text-lg md:text-xl mt-6 max-w-2xl">
-            KiliaCore delivers tailored software solutions – from AI‑ready SaaS platforms and medical LIMS to decentralized applications (dApps) – built with reliability, compliance, and innovation at the core.
-            </p>
-            <div class="flex flex-wrap gap-4 mt-8">
-            <a href="#contact" class="bg-black text-white font-semibold px-6 py-3 rounded-full shadow-lg hover:bg-gray-600 transition flex items-center gap-2">
-                Start a project <i class="fas fa-arrow-right"></i>
-            </a>
-            <a href="#solutions" class="border border-white/40 text-white px-6 py-3 rounded-full font-medium hover:bg-white/10 transition flex items-center gap-2">
-                Explore services <i class="fas fa-cube"></i>
-            </a>
-            </div>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <i class="fas fa-code"></i> <span>Custom Softwares | Web Apps | dApps | Enterprise SaaS</span>
         </div>
-
-        <!-- Right side: animated tech visualization (network graph) -->
-        <div class="flex-1 w-full max-w-lg mx-auto lg:mx-0">
-            <canvas id="heroCanvas" class="w-full h-auto rounded-2xl" width="500" height="400"></canvas>
+        <h1>Beyond code. <span class="text-cyan">Core strength</span> for your digital future.</h1>
+        <p class="hero-subtitle">
+          KiliaCore delivers tailored software solutions – from AI‑ready SaaS platforms and medical LIMS to decentralized applications (dApps) – built with reliability, compliance, and innovation at the core.
+        </p>
+        <div class="hero-buttons">
+          <a href="#contact" class="btn-hero-primary">Start a project <i class="fas fa-arrow-right"></i></a>
+          <a href="#solutions" class="btn-hero-secondary">Explore services <i class="fas fa-cube"></i></a>
         </div>
-        </div>
-    </div>
-    <!-- decorative blur (kept for depth) -->
-    <div class="absolute bottom-0 right-0 w-80 h-80 bg-cyan-400/10 rounded-full blur-3xl -mb-32 -mr-32"></div>
-    </section>
-
-  <!-- Overall software solutions (custom dev, dapps, enterprise) -->
-  <section id="solutions" class="py-20 bg-gray-50">
-    <div class="max-w-7xl mx-auto px-6 sm:px-8">
-      <div class="text-center max-w-2xl mx-auto mb-14">
-        <span class="text-cyan-600 font-semibold text-sm uppercase tracking-wider">What we build</span>
-        <h2 class="text-3xl md:text-4xl font-bold mt-2 text-slate-800">Software solutions for every challenge</h2>
-        <p class="text-gray-600 mt-4">From cloud‑native platforms and on‑demand tools to decentralized apps – we engineer software that scales.</p>
       </div>
-      <div class="grid md:grid-cols-3 gap-8">
-        <div class="bg-white rounded-2xl p-6 card-hover shadow-sm border border-gray-100">
-          <div class="w-12 h-12 bg-cyan-100 rounded-xl flex items-center justify-center text-cyan-700 text-2xl mb-5"><i class="fas fa-laptop-code"></i></div>
-          <h3 class="text-xl font-bold">Custom on‑demand software</h3>
-          <p class="text-gray-600 mt-2">Legacy modernization, workflow automation, data pipelines – any complexity, fully tailored to your business.</p>
+      <div class="hero-visual">
+        <canvas id="heroCanvas"></canvas>
+      </div>
+    </div>
+    <div class="hero-glow"></div>
+  </section>
+
+  <!-- Solutions -->
+  <section id="solutions" class="solutions">
+    <div class="section-header">
+      <span class="section-badge">What we build</span>
+      <h2>Software solutions for every challenge</h2>
+      <p>From cloud‑native platforms and on‑demand tools to decentralized apps – we engineer software that scales.</p>
+    </div>
+    <div class="solutions-grid">
+      <div class="solution-card">
+        <div class="card-icon"><i class="fas fa-laptop-code"></i></div>
+        <h3>Custom on‑demand software</h3>
+        <p>Legacy modernization, workflow automation, data pipelines – any complexity, fully tailored to your business.</p>
+      </div>
+      <div class="solution-card">
+        <div class="card-icon"><i class="fas fa-chalkboard-user"></i></div>
+        <h3>Enterprise SaaS</h3>
+        <p>Multi‑tenant, compliant SaaS platforms with AI, analytics, and advanced security (HIPAA, SOC2 ready).</p>
+      </div>
+      <div class="solution-card">
+        <div class="card-icon"><i class="fas fa-link"></i></div>
+        <h3>dApps & blockchain</h3>
+        <p>Decentralized applications, smart contracts, tokenization – secure, transparent, future‑ready.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- KC LIMS (SaaS) -->
+  <section id="saas" class="saas">
+    <div class="saas-container">
+      <div class="saas-text">
+        <div class="saas-badge">
+          <i class="fas fa-flask"></i> <span>Laboratory Information Management System</span>
         </div>
-        <div class="bg-white rounded-2xl p-6 card-hover shadow-sm border border-gray-100">
-          <div class="w-12 h-12 bg-cyan-100 rounded-xl flex items-center justify-center text-cyan-700 text-2xl mb-5"><i class="fas fa-chalkboard-user"></i></div>
-          <h3 class="text-xl font-bold">Enterprise SaaS</h3>
-          <p class="text-gray-600 mt-2">Multi‑tenant, compliant SaaS platforms with AI, analytics, and advanced security (HIPAA, SOC2 ready).</p>
-        </div>
-        <div class="bg-white rounded-2xl p-6 card-hover shadow-sm border border-gray-100">
-          <div class="w-12 h-12 bg-cyan-100 rounded-xl flex items-center justify-center text-cyan-700 text-2xl mb-5"><i class="fas fa-link"></i></div>
-          <h3 class="text-xl font-bold">dApps & blockchain</h3>
-          <p class="text-gray-600 mt-2">Decentralized applications, smart contracts, tokenization – secure, transparent, future‑ready.</p>
+        <h2>KC LIMS: Core intelligence for medical labs</h2>
+        <p class="saas-desc">
+          Our flagship LIMS solution helps diagnostic and research labs streamline sample tracking, automate QA/QC, maintain regulatory compliance, and generate real‑time insights.
+        </p>
+        <ul class="saas-features">
+          <li><i class="fas fa-check-circle"></i> End‑to‑end sample lifecycle & chain of custody</li>
+          <li><i class="fas fa-check-circle"></i> Integrated audit trails and e‑signatures</li>
+          <li><i class="fas fa-check-circle"></i> Customizable dashboards & instrument integration</li>
+        </ul>
+        <a href="https://kclims.kiliacore.com" class="btn-explore-kclims">Explore KC LIMS <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="saas-visual">
+        <div class="saas-visual-content">
+          <i class="fas fa-microscope icon-large"></i>
+          <p class="italic-quote">"Built for medical labs, loved by lab directors."</p>
+          <div class="saas-tags">
+            <span><i class="fas fa-database"></i> Automatic S3 backups</span>
+            <span><i class="fas fa-shield-alt"></i> HIPAA ready</span>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- EXPLORE SaaS SECTION (highlighted) -->
-  <section id="saas" class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-6 sm:px-8">
-      <div class="flex flex-col lg:flex-row gap-12 items-center">
-        <div class="flex-1 order-2 lg:order-1">
-          <div class="inline-flex items-center gap-2 bg-cyan-50 text-cyan-700 rounded-full px-4 py-1.5 text-sm font-semibold mb-4">
-            <i class="fas fa-flask"></i> <span>Laboratory Information Management System</span>
-          </div>
-          <h2 class="text-3xl md:text-4xl font-bold text-slate-800">KC LIMS: Core intelligence for medical labs</h2>
-          <p class="text-gray-600 text-lg mt-4 leading-relaxed">
-            Our flagship LIMS solution helps diagnostic and research labs streamline sample tracking, automate QA/QC, maintain regulatory compliance, and generate real‑time insights.
-          </p>
-          <ul class="mt-6 space-y-3">
-            <li class="flex items-start gap-3"><i class="fas fa-check-circle text-cyan-600 mt-1"></i> End‑to‑end sample lifecycle & chain of custody</li>
-            <li class="flex items-start gap-3"><i class="fas fa-check-circle text-cyan-600 mt-1"></i> Integrated audit trails and e‑signatures</li>
-            <li class="flex items-start gap-3"><i class="fas fa-check-circle text-cyan-600 mt-1"></i> Customizable dashboards & instrument integration</li>
-          </ul>
-          <div class="mt-8">
-            <a href="https://kclims.kiliacore.com" class="inline-flex items-center gap-2 bg-cyan-700 hover:bg-cyan-800 text-white px-6 py-3 rounded-full font-semibold shadow transition">
-              Explore KC LIMS <i class="fas fa-arrow-right"></i>
-            </a>
-          </div>
+  <!-- dApps -->
+  <section id="dapps" class="dapps">
+    <div class="section-header">
+      <i class="fas fa-cube icon-title"></i>
+      <h2>Decentralized applications (dApps)</h2>
+      <p>Embrace transparency and trust with web3 solutions built by KiliaCore.</p>
+    </div>
+    <div class="dapps-grid">
+      <div class="dapp-card">
+        <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+        <div class="dapp-card-text">
+          <h3>Smart contract development</h3>
+          <p>Audited, gas‑optimized contracts for DeFi, supply chain, identity, and tokenization.</p>
         </div>
-        <div class="flex-1 order-1 lg:order-2 bg-gradient-to-br from-slate-50 to-white rounded-2xl shadow-xl p-8 border border-gray-100 text-center">
-          <i class="fas fa-microscope text-5xl text-cyan-700 mb-4"></i>
-          <p class="text-gray-500 italic">"Built for medical labs, loved by lab directors."</p>
-          <div class="mt-6 flex justify-center gap-2 text-sm text-gray-400"><i class="fas fa-database"></i> <span>Automatic S3 backups</span> <i class="fas fa-shield-alt ml-3"></i> <span>HIPAA ready</span></div>
+      </div>
+      <div class="dapp-card">
+        <div class="card-icon"><i class="fas fa-wallet"></i></div>
+        <div class="dapp-card-text">
+          <h3>dApp frontends & wallets</h3>
+          <p>Seamless Web3 integration, multi‑chain support (EVM, Solana), and custodial/non‑custodial wallet UX.</p>
         </div>
       </div>
     </div>
-  </section>
-
-  <!-- dApps section (highlighting decentralized software) -->
-  <section id="dapps" class="py-20 bg-gray-50">
-    <div class="max-w-7xl mx-auto px-6 sm:px-8">
-      <div class="text-center mb-12 max-w-2xl mx-auto">
-        <i class="fas fa-cube text-3xl text-cyan-600 mb-2"></i>
-        <h2 class="text-3xl font-bold mt-2">Decentralized applications (dApps)</h2>
-        <p class="text-gray-600 mt-3">Embrace transparency and trust with web3 solutions built by KiliaCore.</p>
-      </div>
-      <div class="grid md:grid-cols-2 gap-8">
-        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 card-hover flex gap-4 flex-wrap items-start">
-          <div class="bg-indigo-50 w-12 h-12 rounded-xl flex items-center justify-center text-indigo-600 text-2xl"><i class="fas fa-chart-line"></i></div>
-          <div class="flex-1">
-            <h3 class="text-xl font-semibold">Smart contract development</h3>
-            <p class="text-gray-500">Audited, gas‑optimized contracts for DeFi, supply chain, identity, and tokenization.</p>
-          </div>
-        </div>
-        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 card-hover flex gap-4 items-start">
-          <div class="bg-indigo-50 w-12 h-12 rounded-xl flex items-center justify-center text-indigo-600 text-2xl"><i class="fas fa-wallet"></i></div>
-          <div class="flex-1">
-            <h3 class="text-xl font-semibold">dApp frontends & wallets</h3>
-            <p class="text-gray-500">Seamless Web3 integration, multi‑chain support (EVM, Solana), and custodial/non‑custodial wallet UX.</p>
-          </div>
-        </div>
-      </div>
-      <div class="mt-8 text-center">
-        <a href="#contact" class="inline-flex items-center gap-2 text-cyan-700 font-semibold border-b border-cyan-300 hover:border-cyan-700">Discuss your dApp idea →</a>
-      </div>
+    <div class="dapps-cta">
+      <a href="#contact">Discuss your dApp idea →</a>
     </div>
   </section>
 
-  <!-- Testimonials section (realistic, healthcare & enterprise) -->
-  <section id="testimonials" class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-6 sm:px-8">
-      <div class="text-center mb-14">
-        <span class="text-cyan-600 text-sm font-semibold uppercase tracking-wider">Trusted by innovators</span>
-        <h2 class="text-3xl md:text-4xl font-bold mt-2">What our clients say</h2>
-        <p class="text-gray-500 max-w-xl mx-auto mt-3">From medical laboratories to blockchain startups – real results.</p>
-      </div>
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- testimonial 1 -->
-        <div class="testimonial-card p-6 border border-gray-100 shadow-sm">
-          <div class="flex items-center gap-1 text-yellow-400 mb-3"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-          <p class="text-gray-700 italic">“KiliaCore built our custom LIMS from scratch. The team understood compliance, integration with our analyzers, and delivered on time. We’ve reduced turnaround time by 35%.”</p>
-          <div class="flex items-center gap-3 mt-5">
-            <div class="w-10 h-10 rounded-full bg-cyan-100 flex items-center justify-center text-cyan-700 font-bold">DR</div>
-            <div><p class="font-semibold">Dr. Saeedullah</p><p class="text-xs text-gray-400">Lab Director, Dr. Saeed Diagnostics & Health Services</p></div>
-          </div>
-        </div>
-        <!-- testimonial 2 -->
-        <div class="testimonial-card p-6 border border-gray-100 shadow-sm">
-          <div class="flex items-center gap-1 text-yellow-400 mb-3"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-          <p class="text-gray-700 italic">“We started a new lab and KC LIMS made the workflow painless for us without needing much staff. KC LIMS is the best ever lab solution. Recommended!”</p>
-          <div class="flex items-center gap-3 mt-5">
-            <div class="w-10 h-10 rounded-full bg-cyan-100 flex items-center justify-center text-cyan-700 font-bold">MK</div>
-            <div><p class="font-semibold">Dr. Ilyas</p><p class="text-xs text-gray-400">Lab Director, Ilyas Clinical Laboratory</p></div>
-          </div>
-        </div>
-
-        <!-- testimonial 3 -->
-        <div class="testimonial-card p-6 border border-gray-100 shadow-sm">
-          <div class="flex items-center gap-1 text-yellow-400 mb-3"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-          <p class="text-gray-700 italic">“The built‑in audit trails and auto‑generated reports made the compliance audit painless. The support team customised reporting templates and I can monitor everything from home.”</p>
-          <div class="flex items-center gap-3 mt-5">
-            <div class="w-10 h-10 rounded-full bg-cyan-100 flex items-center justify-center text-cyan-700 font-bold">IR</div>
-            <div><p class="font-semibold">Abdullah</p><p class="text-xs text-gray-400">Lab Director, ADC Lab</p></div>
+  <!-- Testimonials -->
+  <section id="testimonials" class="testimonials">
+    <div class="section-header">
+      <span class="section-badge">Trusted by innovators</span>
+      <h2>What our clients say</h2>
+      <p>From medical laboratories to blockchain startups – real results.</p>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <p class="testimonial-text">“KiliaCore built our custom LIMS from scratch. The team understood compliance, integration with our analyzers, and delivered on time. We’ve reduced turnaround time by 35%.”</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">DR</div>
+          <div>
+            <p class="author-name">Dr. Saeedullah</p>
+            <p class="author-role">Lab Director, Dr. Saeed Diagnostics & Health Services</p>
           </div>
         </div>
       </div>
-      <div class="mt-12 text-center text-gray-500 text-sm flex justify-center gap-6 flex-wrap">
-        <span><i class="fas fa-check-circle text-cyan-600"></i> 100% client retention</span>
-        <span><i class="fas fa-check-circle text-cyan-600"></i> 24/7 support</span>
+      <div class="testimonial-card">
+        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <p class="testimonial-text">“We started a new lab and KC LIMS made the workflow painless for us without needing much staff. KC LIMS is the best ever lab solution. Recommended!”</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">MK</div>
+          <div>
+            <p class="author-name">Dr. Ilyas</p>
+            <p class="author-role">Lab Director, Ilyas Clinical Laboratory</p>
+          </div>
+        </div>
       </div>
+      <div class="testimonial-card">
+        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <p class="testimonial-text">“The built‑in audit trails and auto‑generated reports made the compliance audit painless. The support team customised reporting templates and I can monitor everything from home.”</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">IR</div>
+          <div>
+            <p class="author-name">Abdullah</p>
+            <p class="author-role">Lab Director, ADC Lab</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-stats">
+      <span><i class="fas fa-check-circle"></i> 100% client retention</span>
+      <span><i class="fas fa-check-circle"></i> 24/7 support</span>
     </div>
   </section>
 
-  <!-- Contact / Call to Action -->
-  <section id="contact" class="py-20 bg-slate-900 text-white">
-    <div class="max-w-7xl mx-auto px-6 sm:px-8">
-      <div class="grid lg:grid-cols-2 gap-12 items-center">
-        <div>
-          <h2 class="text-3xl md:text-4xl font-bold">Let’s bring your software vision to life</h2>
-          <p class="text-slate-300 text-lg mt-4">SaaS, custom platforms or dApps – our team is ready to build it with you.</p>
-          <div class="mt-8 space-y-4">
-            <div class="flex items-center gap-3"><i class="fas fa-envelope text-cyan-400 w-6"></i> <span>kiliacoresoftware@gmail.com</span></div>
-            <div class="flex items-center gap-3"><i class="fas fa-phone-alt text-cyan-400 w-6"></i> <span>+92 (308) 9480882</span></div>
-            <div class="flex items-center gap-3"><i class="fas fa-map-marker-alt text-cyan-400 w-6"></i> <span>G.R. square, Shahdherai road, Kabal, Swat</span></div>
-          </div>
+  <!-- Contact -->
+  <section id="contact" class="contact">
+    <div class="contact-container">
+      <div class="contact-info">
+        <h2>Let’s bring your software vision to life</h2>
+        <p>SaaS, custom platforms or dApps – our team is ready to build it with you.</p>
+        <div class="contact-details">
+          <div><i class="fas fa-envelope"></i> <span>kiliacoresoftware@gmail.com</span></div>
+          <div><i class="fas fa-phone-alt"></i> <span>+92 (308) 9480882</span></div>
+          <div><i class="fas fa-map-marker-alt"></i> <span>G.R. square, Shahdherai road, Kabal, Swat</span></div>
         </div>
-        <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
-          <h3 class="text-2xl font-semibold">Request a consultation</h3>
-          <p class="text-slate-300 text-sm mb-5">We’ll get back within 24h.</p>
-          <form id="contactForm" action="#" method="POST" class="space-y-4">
-            <div><input type="text" id="name" placeholder="Full name" required class="w-full px-4 py-3 rounded-xl bg-slate-800 border border-slate-700 text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500"></div>
-            <div><input type="email" id="email" placeholder="Email address" required class="w-full px-4 py-3 rounded-xl bg-slate-800 border border-slate-700 text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500"></div>
-            <div><textarea id="message" rows="3" placeholder="Tell us about your project (SaaS, dApp, custom software...)" class="w-full px-4 py-3 rounded-xl bg-slate-800 border border-slate-700 text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500"></textarea></div>
-            <button type="submit" id="submitBtn" class="w-full bg-cyan-600 hover:bg-cyan-500 transition py-3 rounded-xl font-semibold flex items-center justify-center gap-2"><i class="fas fa-paper-plane"></i> Send message</button>
-            <p id="formFeedback" class="text-sm text-center text-cyan-300 hidden"></p>
-          </form>
-        </div>
+      </div>
+      <div class="contact-form-wrapper">
+        <h3>Request a consultation</h3>
+        <p class="form-subtitle">We’ll get back within 24h.</p>
+        <form id="contactForm" method="POST">
+          <input type="text" id="name" placeholder="Full name" required>
+          <input type="email" id="email" placeholder="Email address" required>
+          <textarea id="message" rows="3" placeholder="Tell us about your project (SaaS, dApp, custom software...)"></textarea>
+          <button type="submit" id="submitBtn"><i class="fas fa-paper-plane"></i> Send message</button>
+          <p id="formFeedback" class="form-feedback hidden"></p>
+        </form>
       </div>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="bg-gray-900 text-gray-400 py-10 border-t border-gray-800">
-    <div class="max-w-7xl mx-auto px-6 sm:px-8 text-center">
-      <div class="flex justify-center space-x-6 mb-6">
-        <i class="fab fa-linkedin text-xl hover:text-white cursor-pointer"></i>
-        <i class="fab fa-twitter text-xl hover:text-white cursor-pointer"></i>
-        <i class="fab fa-github text-xl hover:text-white cursor-pointer"></i>
-      </div>
-      <p>© 2025 KiliaCore Softwares — Core strength for your digital journey. All rights reserved.</p>
-      <p class="text-xs mt-2">Custom software · SaaS · dApps · Enterprise SaaS</p>
+  <footer class="footer">
+    <div class="footer-social">
+      <i class="fab fa-linkedin"></i>
+      <i class="fab fa-twitter"></i>
+      <i class="fab fa-github"></i>
     </div>
+    <p>© 2025 KiliaCore Softwares — Core strength for your digital journey. All rights reserved.</p>
+    <p class="footer-tagline">Custom Softwares | Web Apps | dApps | Enterprise SaaS</p>
   </footer>
 
-  <!-- simple interactive: mobile menu + form demo -->
+  <!-- JavaScript (mobile menu, form, canvas) -->
   <script>
-    window.csrfToken = '{{ csrf_token }}';
+    // CSRF token from meta tag
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+    // Mobile menu toggle
     const mobileBtn = document.getElementById('mobileMenuBtn');
     const mobileMenu = document.getElementById('mobileMenu');
-    if(mobileBtn) {
+    if (mobileBtn) {
       mobileBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
     }
 
+    // Contact form AJAX
     const form = document.getElementById('contactForm');
     const feedback = document.getElementById('formFeedback');
     if (form) {
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const name = document.getElementById('name').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const message = document.getElementById('message').value.trim();
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const message = document.getElementById('message').value.trim();
 
-            if (!name || !email) {
-                feedback.textContent = 'Please fill in your name and email.';
-                feedback.classList.remove('hidden');
-                feedback.classList.add('text-amber-300');
-                setTimeout(() => feedback.classList.add('hidden'), 3000);
-                return;
+        if (!name || !email) {
+          feedback.textContent = 'Please fill in your name and email.';
+          feedback.classList.remove('hidden');
+          feedback.classList.add('error');
+          setTimeout(() => feedback.classList.add('hidden'), 3000);
+          return;
+        }
+
+        const btn = document.getElementById('submitBtn');
+        const originalHtml = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+        btn.disabled = true;
+
+        fetch('/contact/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrfToken
+          },
+          body: JSON.stringify({ name, email, message })
+        })
+          .then(response => response.json())
+          .then(data => {
+            btn.innerHTML = originalHtml;
+            btn.disabled = false;
+            if (data.status === 'success') {
+              feedback.textContent = '✔️ Thanks! Our team will reach out shortly.';
+              feedback.classList.remove('hidden', 'error');
+              feedback.classList.add('success');
+              form.reset();
+            } else {
+              feedback.textContent = data.message || 'Something went wrong.';
+              feedback.classList.remove('hidden');
+              feedback.classList.add('error');
             }
-
-            const btn = document.getElementById('submitBtn');
-            const originalHtml = btn.innerHTML;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-            btn.disabled = true;
-
-            fetch('/contact/', {   // URL for the ContactFormView
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': window.csrfToken
-                },
-                body: JSON.stringify({
-                    name: name,
-                    email: email,
-                    message: message
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                btn.innerHTML = originalHtml;
-                btn.disabled = false;
-                if (data.status === 'success') {
-                    feedback.textContent = '✔️ Thanks! Our team will reach out shortly.';
-                    feedback.classList.remove('hidden', 'text-amber-300');
-                    feedback.classList.add('text-cyan-300');
-                    form.reset();
-                } else {
-                    feedback.textContent = data.message || 'Something went wrong.';
-                    feedback.classList.remove('hidden');
-                    feedback.classList.add('text-amber-300');
-                }
-                setTimeout(() => feedback.classList.add('hidden'), 4000);
-            })
-            .catch(error => {
-                btn.innerHTML = originalHtml;
-                btn.disabled = false;
-                feedback.textContent = 'Network error. Please try again.';
-                feedback.classList.remove('hidden');
-                feedback.classList.add('text-amber-300');
-                setTimeout(() => feedback.classList.add('hidden'), 4000);
-            });
-        });
+            setTimeout(() => feedback.classList.add('hidden'), 4000);
+          })
+          .catch(error => {
+            btn.innerHTML = originalHtml;
+            btn.disabled = false;
+            feedback.textContent = 'Network error. Please try again.';
+            feedback.classList.remove('hidden');
+            feedback.classList.add('error');
+            setTimeout(() => feedback.classList.add('hidden'), 4000);
+          });
+      });
     }
 
+    // Hero canvas animation (identical logic, just uses new class names)
     (function() {
-        const canvas = document.getElementById('heroCanvas');
-        if (!canvas) return;
+      const canvas = document.getElementById('heroCanvas');
+      if (!canvas) return;
+      let ctx = canvas.getContext('2d');
+      let width = 500, height = 400;
+      let nodes = [], edges = [], animationId = null;
 
-        let width = 500, height = 400;
-        let ctx = canvas.getContext('2d');
-
-        // resize canvas to match container while keeping crisp rendering
-        function resizeCanvas() {
+      function resizeCanvas() {
         const container = canvas.parentElement;
-        const containerWidth = container.clientWidth;
-        // maintain aspect ratio ~5:4
         const aspect = 5 / 4;
-        let newWidth = Math.min(containerWidth, 500);
+        let newWidth = Math.min(container.clientWidth, 500);
         let newHeight = newWidth / aspect;
         canvas.width = newWidth;
         canvas.height = newHeight;
         width = newWidth;
         height = newHeight;
-        drawNetwork(); // redraw immediately after resize
-        }
+        drawNetwork();
+      }
 
-        // ----- network animation parameters -----
-        let nodes = [];
-        let edges = [];
-        let animationId = null;
-
-        function initNodes() {
+      function initNodes() {
         const nodeCount = 18;
         nodes = [];
         for (let i = 0; i < nodeCount; i++) {
-            nodes.push({
+          nodes.push({
             x: Math.random() * width,
             y: Math.random() * height,
             vx: (Math.random() - 0.5) * 0.5,
             vy: (Math.random() - 0.5) * 0.5,
             radius: 3 + Math.random() * 4
-            });
+          });
         }
-        // create edges based on distance
         edges = [];
         for (let i = 0; i < nodes.length; i++) {
-            for (let j = i+1; j < nodes.length; j++) {
+          for (let j = i+1; j < nodes.length; j++) {
             const dx = nodes[i].x - nodes[j].x;
             const dy = nodes[i].y - nodes[j].y;
             const dist = Math.hypot(dx, dy);
             if (dist < width * 0.25) {
-                edges.push({ from: i, to: j, dist });
+              edges.push({ from: i, to: j, dist });
             }
-            }
+          }
         }
-        }
+      }
 
-        function updateNodes() {
+      function updateNodes() {
         for (let node of nodes) {
-            node.x += node.vx;
-            node.y += node.vy;
-            // bounce edges
-            if (node.x < 0 || node.x > width) node.vx *= -1;
-            if (node.y < 0 || node.y > height) node.vy *= -1;
-            node.x = Math.min(Math.max(node.x, 0), width);
-            node.y = Math.min(Math.max(node.y, 0), height);
+          node.x += node.vx;
+          node.y += node.vy;
+          if (node.x < 0 || node.x > width) node.vx *= -1;
+          if (node.y < 0 || node.y > height) node.vy *= -1;
+          node.x = Math.min(Math.max(node.x, 0), width);
+          node.y = Math.min(Math.max(node.y, 0), height);
         }
-        // update edges (recalculate distances for line opacity)
         for (let edge of edges) {
-            const dx = nodes[edge.from].x - nodes[edge.to].x;
-            const dy = nodes[edge.from].y - nodes[edge.to].y;
-            edge.dist = Math.hypot(dx, dy);
+          const dx = nodes[edge.from].x - nodes[edge.to].x;
+          const dy = nodes[edge.from].y - nodes[edge.to].y;
+          edge.dist = Math.hypot(dx, dy);
         }
-        }
+      }
 
-        function drawNetwork() {
+      function drawNetwork() {
         if (!ctx) return;
         ctx.clearRect(0, 0, width, height);
-
-        // draw glowing edges
         for (let edge of edges) {
-            const nodeA = nodes[edge.from];
-            const nodeB = nodes[edge.to];
-            const opacity = Math.max(0, Math.min(0.8, 1 - edge.dist / (width * 0.3)));
-            ctx.beginPath();
-            ctx.moveTo(nodeA.x, nodeA.y);
-            ctx.lineTo(nodeB.x, nodeB.y);
-            ctx.strokeStyle = `rgba(56, 189, 248, ${opacity * 0.6})`;
-            ctx.lineWidth = 1.5;
-            ctx.stroke();
+          const nodeA = nodes[edge.from];
+          const nodeB = nodes[edge.to];
+          const opacity = Math.max(0, Math.min(0.8, 1 - edge.dist / (width * 0.3)));
+          ctx.beginPath();
+          ctx.moveTo(nodeA.x, nodeA.y);
+          ctx.lineTo(nodeB.x, nodeB.y);
+          ctx.strokeStyle = `rgba(56, 189, 248, ${opacity * 0.6})`;
+          ctx.lineWidth = 1.5;
+          ctx.stroke();
         }
-
-        // draw nodes
         for (let node of nodes) {
-            ctx.beginPath();
-            ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
-            ctx.fillStyle = '#38bdf8';
-            ctx.shadowBlur = 8;
-            ctx.shadowColor = '#38bdf8';
-            ctx.fill();
-            ctx.shadowBlur = 0;
-            // inner glow
-            ctx.beginPath();
-            ctx.arc(node.x, node.y, node.radius * 0.6, 0, Math.PI * 2);
-            ctx.fillStyle = 'white';
-            ctx.fill();
+          ctx.beginPath();
+          ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+          ctx.fillStyle = '#38bdf8';
+          ctx.shadowBlur = 8;
+          ctx.shadowColor = '#38bdf8';
+          ctx.fill();
+          ctx.shadowBlur = 0;
+          ctx.beginPath();
+          ctx.arc(node.x, node.y, node.radius * 0.6, 0, Math.PI * 2);
+          ctx.fillStyle = 'white';
+          ctx.fill();
         }
-        }
+      }
 
-        let lastTimestamp = 0;
-        function animate(timestamp) {
+      function animate() {
         updateNodes();
         drawNetwork();
         animationId = requestAnimationFrame(animate);
-        }
+      }
 
-        function startAnimation() {
+      function startAnimation() {
         if (animationId) cancelAnimationFrame(animationId);
         initNodes();
         animate();
-        }
+      }
 
-        window.addEventListener('resize', () => {
+      window.addEventListener('resize', () => {
         resizeCanvas();
-        initNodes();        // reinitialize nodes to new dimensions
-        drawNetwork();
-        });
+        initNodes();
+      });
 
-        resizeCanvas();
-        startAnimation();
-
-        // clean up on page unload (optional)
-        window.addEventListener('beforeunload', () => {
+      resizeCanvas();
+      startAnimation();
+      window.addEventListener('beforeunload', () => {
         if (animationId) cancelAnimationFrame(animationId);
-        });
+      });
     })();
   </script>
 </body>

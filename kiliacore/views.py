@@ -11,21 +11,19 @@ from django.urls import reverse
 
 logger = logging.getLogger(__name__)
 
-def send_email_via_maileroo(subject, message, to_email, reply_to=None):
-    """Send email using Django's email backend (configured for Maileroo)."""
-    connection = get_connection(timeout=10)
+def send_email(subject, message, to_email, reply_to=None):
+    """Send an email using Django's configured email backend."""
     email = EmailMessage(
         subject=subject,
         body=message,
         from_email=settings.DEFAULT_FROM_EMAIL,
         to=[to_email],
         reply_to=[reply_to] if reply_to else None,
-        connection=connection,
     )
     try:
-        sent = email.send(fail_silently=False)
-        logger.info('Email sent to %s (sent=%s)', to_email, sent)
-        return 200
+        email.send(fail_silently=False)
+        logger.info('Email sent to %s', to_email)
+        return True
     except Exception as exc:
         logger.exception('Failed to send email to %s: %s', to_email, exc)
         raise
@@ -61,7 +59,7 @@ Message:
 Sent from KiliaCore landing page.
             """
 
-            send_email_via_maileroo(
+            send_email(
                 subject=subject,
                 message=email_body,
                 to_email='shahsabir946@gmail.com',

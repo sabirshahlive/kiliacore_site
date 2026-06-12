@@ -3,8 +3,8 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
-DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'your-default-secret-key')
+DEBUG = os.environ.get('DEBUG', 'False') == 'False'
 
 ALLOWED_HOSTS = os.environ.get(
     'ALLOWED_HOSTS',
@@ -37,7 +37,9 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'django.template.context_processors.debug',
                 'django.template.context_processors.request',
+                'django.template.context_processors.static',
             ],
         },
     },
@@ -58,7 +60,7 @@ DATABASES = {
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-# Optional: email settings for the contact form
+# Email settings for the contact form
 if DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 else:
@@ -67,6 +69,8 @@ else:
     EMAIL_PORT = 465
     EMAIL_USE_SSL = True
     EMAIL_USE_TLS = False
+    EMAIL_HOST_USER = 'resend'
+    EMAIL_HOST_PASSWORD = os.environ.get('RESEND_API_KEY')
 
 DEFAULT_FROM_EMAIL = 'support@kiliacore.com'
 SERVER_EMAIL = 'support@kiliacore.com'
