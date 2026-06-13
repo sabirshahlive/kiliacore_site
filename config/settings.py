@@ -67,13 +67,10 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 if DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 else:
-    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-    EMAIL_HOST = 'smtp.resend.com'
-    EMAIL_PORT = 465
-    EMAIL_USE_SSL = True
-    EMAIL_USE_TLS = False
-    EMAIL_HOST_USER = 'resend'
-    EMAIL_HOST_PASSWORD = os.environ.get('RESEND_API_KEY')
+    # Use Resend HTTP API (no SMTP)
+    EMAIL_BACKEND = 'core.email_backends.ResendHTTPBackend'
+
+RESEND_API_KEY = os.environ.get('RESEND_API_KEY')   # must be set
 
 DEFAULT_FROM_EMAIL = 'support@kiliacore.com'
 SERVER_EMAIL = 'support@kiliacore.com'
