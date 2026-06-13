@@ -12,17 +12,21 @@ from django.urls import reverse
 logger = logging.getLogger(__name__)
 
 def send_email(subject, message, to_email, reply_to=None):
-    """Send an email using Django's configured email backend. Configured for RESEND"""
+    """Send email using Django's email backend (configured for Resend).
+    Uses an explicit connection (matching the working LabFlow version).
+    """
+    connection = get_connection(timeout=10)          # ← explicit connection
     email = EmailMessage(
         subject=subject,
         body=message,
         from_email=settings.DEFAULT_FROM_EMAIL,
         to=[to_email],
         reply_to=[reply_to] if reply_to else None,
+        connection=connection,                       # ← use it here
     )
     try:
-        email.send(fail_silently=False)
-        logger.info('Email sent to %s', to_email)
+        sent = email.send(fail_silently=False)
+        logger.info('Email sent to %s (sent=%s)', to_email, sent)
         return True
     except Exception as exc:
         logger.exception('Failed to send email to %s: %s', to_email, exc)
