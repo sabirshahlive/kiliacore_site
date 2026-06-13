@@ -68,7 +68,7 @@ if DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 else:
     # Use Resend HTTP API (no SMTP)
-    EMAIL_BACKEND = 'core.email_backends.ResendHTTPBackend'
+    EMAIL_BACKEND = 'kiliacore.email_backends.ResendHTTPBackend'
 
 RESEND_API_KEY = os.environ.get('RESEND_API_KEY')   # must be set
 
