@@ -77,4 +77,4 @@ else:
 
 DEFAULT_FROM_EMAIL = 'support@kiliacore.com'
 SERVER_EMAIL = 'support@kiliacore.com'
-SUPPORT_EMAIL = 'support@kiliacore.com'
+SUPPORT_EMAIL = 'kiliacoresoftware@gmail.com'

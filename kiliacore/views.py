@@ -12,7 +12,7 @@ from django.urls import reverse
 logger = logging.getLogger(__name__)
 
 def send_email(subject, message, to_email, reply_to=None):
-    """Send an email using Django's configured email backend."""
+    """Send an email using Django's configured email backend. Configured for RESEND"""
     email = EmailMessage(
         subject=subject,
         body=message,
@@ -62,7 +62,7 @@ Sent from KiliaCore landing page.
             send_email(
                 subject=subject,
                 message=email_body,
-                to_email='kiliacoresoftware@gmail.com',
+                to_email=settings.SUPPORT_EMAIL,
                 reply_to=email
             )
 
