@@ -11,7 +11,7 @@ class ResendHTTPBackend(BaseEmailBackend):
     """
     Email backend that uses Resend's HTTP API instead of SMTP
     Configure in settings:
-    EMAIL_BACKEND = 'core.email_backends.ResendHTTPBackend'
+    EMAIL_BACKEND = 'kiliacore.email_backends.ResendHTTPBackend'
     RESEND_API_KEY = 'your-api-key'
     """
     
