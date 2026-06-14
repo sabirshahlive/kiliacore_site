@@ -1,49 +1,9 @@
+{% extends "base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>KiliaCore — Custom Softwares | Web Apps | dApps | Enterprise SaaS</title>
-  <!-- Font Awesome icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <!-- Our custom CSS -->
-  <link rel="stylesheet" href="{% static 'css/custom.css' %}">
-  <!-- CSRF token for AJAX calls -->
-  <meta name="csrf-token" content="{% csrf_token %}">
-</head>
+{% block title %}KiliaCore – Core strength for your digital future{% endblock %}
 
-<body>
-  <!-- Navigation -->
-  <nav class="navbar">
-    <div class="nav-container">
-      <div class="nav-logo">
-        <img src="{% static 'images/kiliacore_logo.png' %}" alt="KiliaCore Logo" class="logo-img">
-      </div>
-      <div class="nav-links">
-        <a href="#solutions">Solutions</a>
-        <a href="#saas">SaaS</a>
-        <a href="#dapps">dApps</a>
-        <a href="#testimonials">Clients</a>
-        <a href="#contact">Contact</a>
-      </div>
-      <div class="nav-actions">
-        <a href="#contact" class="btn-contact-nav">Get in touch</a>
-        <button id="mobileMenuBtn" class="mobile-toggler"><i class="fas fa-bars"></i></button>
-      </div>
-    </div>
-    <!-- Mobile menu -->
-    <div id="mobileMenu" class="mobile-menu hidden">
-      <a href="#solutions">Solutions</a>
-      <a href="#saas">SaaS</a>
-      <a href="#dapps">dApps</a>
-      <a href="#testimonials">Clients</a>
-      <a href="#contact">Contact</a>
-      <a href="#contact" class="btn-contact-mobile">Contact us</a>
-    </div>
-  </nav>
-
+{% block content %}
   <!-- Hero -->
   <section class="hero">
     <div class="hero-container">
@@ -225,31 +185,12 @@
       </div>
     </div>
   </section>
+{% endblock %}
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="footer-social">
-      <i class="fab fa-linkedin"></i>
-      <i class="fab fa-twitter"></i>
-      <i class="fab fa-github"></i>
-    </div>
-    <p>© 2025 KiliaCore Softwares — Core strength for your digital journey. All rights reserved.</p>
-    <p class="footer-tagline">Custom Softwares | Web Apps | dApps | Enterprise SaaS</p>
-  </footer>
-
-  <!-- JavaScript (mobile menu, form, canvas) -->
+{% block extra_scripts %}
+  <!-- Contact form AJAX and canvas animation -->
   <script>
-    // CSRF token from meta tag
-    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-
-    // Mobile menu toggle
-    const mobileBtn = document.getElementById('mobileMenuBtn');
-    const mobileMenu = document.getElementById('mobileMenu');
-    if (mobileBtn) {
-      mobileBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
-    }
-
-    // Contact form AJAX
+    // Contact form AJAX (uses csrfToken from base.html)
     const form = document.getElementById('contactForm');
     const feedback = document.getElementById('formFeedback');
     if (form) {
@@ -307,7 +248,7 @@
       });
     }
 
-    // Hero canvas animation (identical logic, just uses new class names)
+    // Hero canvas animation
     (function() {
       const canvas = document.getElementById('heroCanvas');
       if (!canvas) return;
@@ -421,5 +362,4 @@
       });
     })();
   </script>
-</body>
-</html>
+{% endblock %}
